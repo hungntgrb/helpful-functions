@@ -1,8 +1,14 @@
-r"""Generate a bunch of files with date in filename, random extension.
+r"""Generate a bunch of empty demofiles with date in filename, random extension.
+
+>>> python filenameWithDate 50 t a
+= filesWithDateName(howMany=50, pad=True, format_='American')
+=> will create <50> random empty files with <padded American format date> in filename.
+
 Nguyen Thanh Hung - hungnt89@gmail.com
 hungntgrb"""
 
 from random import choice, randint
+import sys
 
 
 def randomMonth(pad=False):
@@ -16,11 +22,31 @@ def randomMonth(pad=False):
         return f"{rm}"
 
 
+def randomMonthBetween(m1=1, m2=12, pad=False):
+    """Generate a random month in a range either with padding or not."""
+    
+    rm = randint(m1, m2)
+    
+    if pad:
+        return f"{rm:0>2}"
+    else:
+        return f"{rm}"
+
+
 def randomDay(pad=False):
     """Generate a random day either with padding or not."""
     
     rd = randint(1, 31)
     
+    if pad:
+        return f"{rd:0>2}"
+    else:
+        return f"{rd}"
+
+
+def randomDayBetween(d1=1, d2=31, pad=False):
+    """Generate a random day in a range either with padding or not."""
+    rd = randint(d1, d2)
     if pad:
         return f"{rd:0>2}"
     else:
@@ -110,6 +136,15 @@ def filesWithDateName(howMany=10, pad=True, format_='European'):
     print('Done.')
 
 
+if __name__ == "__main__":
+    
+    a1 = int(sys.argv[1])
+    d2 = {'t': True, 'f': False}
+    a2 = d2.get(sys.argv[2])
+    d3 = {'a': 'American', 'e': 'European'}
+    a3 = d3.get(sys.argv[3])
+
+    filesWithDateName(howMany=a1, pad=a2, format_=a3)
 
 
 
